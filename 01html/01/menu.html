@@ -48,6 +48,36 @@
       .visual {
         background-color: green;
         height: 400px;
+        margin-bottom: 1em;
+      }
+      .section {
+        width: 1360px;
+        margin: 0 auto;
+        margin-bottom: 1em;
+      }
+      .section .secLeft {
+        float: left;
+        width: 1000px;
+        background: skyblue;
+      }
+      .section .secRight {
+        float: right;
+        width: 300px;
+        background: pink;
+      }
+      .section div {
+        height: 700px;
+      }
+      .ft {
+        background: green;
+        padding: 20px 0px;
+      }
+      .ft div {
+        width: 1360px;
+        margin: 0 auto;
+        text-align: center;
+        background-color: orange;
+        padding: 10px 0px;
       }
     </style>
   </head>
@@ -61,6 +91,20 @@
         <li><a href="#">menu5 메뉴 수정 테스트</a></li>
       </ul>
     </header>
-    <div class="visual"></div>
+    <!-- 슬라이드 -->
+    <div class="visual">slide</div>
+    <!-- 섹션 -->
+    <section class="section clear">
+      <div class="secLeft">left</div>
+      <div class="secRight">right</div>
+    </section>
+    <footer class="ft">
+      <div>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni
+        voluptatibus praesentium minus natus repellendus doloribus officia
+        quidem nisi possimus doloremque, est tempora at sit aperiam, obcaecati
+        minima officiis inventore delectus?
+      </div>
+    </footer>
   </body>
 </html>
