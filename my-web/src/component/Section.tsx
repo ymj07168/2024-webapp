@@ -38,7 +38,7 @@ const Section = () => {
   return (
     <StyledContainer>
       <div className="text-wrap">
-        <h1>Lorem ipsum dolor sit...</h1>
+        <h1>Lorem ipsum dolor sit.</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
       </div>
       <img src={image1} alt="section-image" />
