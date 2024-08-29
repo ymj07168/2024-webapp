@@ -76,6 +76,15 @@
         document.getElementsByClassName("box")[0].style.width = "200px";
         document.getElementsByClassName("box")[0].style.height = "200px";
       }
-    </script>
+
+      const pro = new Promise(function(resolve, reject){
+        setTimeout(function(){resolve('성공ㅇㅇㅇ')}, 3000)
+      })
+
+      pro.then(function(value){
+        console.log(value)
+      })
+
+</script>
   </body>
 </html>
