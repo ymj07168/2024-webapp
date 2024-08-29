@@ -5,6 +5,7 @@ import CardList from "./component/CardList";
 import styled from "styled-components";
 import Footer from "./component/Footer";
 import NewsList from "./component/NewsList";
+import Pagination from "./component/Pagination";
 
 const Container = styled.div`
   width: 100%;
@@ -19,6 +20,7 @@ function App() {
     <>
       <Header />
       <Container>
+        <Pagination />
         <Section />
         <CardList />
         <NewsList />

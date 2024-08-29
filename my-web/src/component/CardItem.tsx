@@ -3,13 +3,16 @@ import styled from "styled-components";
 import cardImg1 from "../images/card1.png";
 
 const ItemContainer = styled.div`
-  width: 380px;
+  width: 100%;
+  max-width: 380px;
   height; 580px;
   display: flex;
   flex-direction: column;
   padding: 20px;
   gap: 10px;
   img{
+    width: 100%;
+    object-fit: cover;
     transition: 0.3s;
   };
   img:hover {

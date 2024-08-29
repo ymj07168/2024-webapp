@@ -6,13 +6,13 @@ const StyledContainer = styled.div`
   position: relative;
   width: 100%;
   max-width: 1360px;
-  height: 500px;
+  height: 90vh;
   .text-wrap {
     position: absolute;
     top: 0;
     left: 0;
     width: 90%;
-    height: 300px;
+    height: 80%;
     padding: 30px 50px;
     display: flex;
     flex-direction: column;
@@ -30,7 +30,7 @@ const StyledContainer = styled.div`
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 600px;
+    width: 50%;
   }
 `;
 
