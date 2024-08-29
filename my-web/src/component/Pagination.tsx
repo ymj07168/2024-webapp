@@ -41,11 +41,12 @@ const PaginationComponent = () => {
               zIndex: 20000,
               textAlign: "center",
               fontSize: "40px",
-              fontStyle: "bold",
-              paddingTop: "200px",
+              fontWeight: "bold",
+              paddingTop: "300px",
+              color: "white",
             }}
           >
-            넷마블문화재단웹사이트입니다
+            넷마블문화재단 웹사이트입니다
           </div>
         </div>
       </SwiperSlide>
@@ -64,11 +65,14 @@ const PaginationComponent = () => {
             style={{
               textAlign: "center",
               fontSize: "40px",
-              fontStyle: "bold",
-              paddingTop: "200px",
+              fontWeight: "bold",
+              paddingTop: "300px",
+              color: "blue",
             }}
           >
-            넷마블문화재단웹사이트입니다22222
+            넷마블문화재단 웹사이트입니다
+            <br />
+            클론코딩
           </div>
         </div>
       </SwiperSlide>
