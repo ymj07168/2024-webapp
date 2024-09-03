@@ -28,7 +28,6 @@ export default {
   name: "containerView",
   props: {
     data: Array,
-    isModal: Boolean,
   },
 };
 </script>

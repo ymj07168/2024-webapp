@@ -1,6 +1,6 @@
 <template>
   <NavbarView />
-  <ContainerView :data="data" :isModal="isModal" @openModal="modalOpen" />
+  <ContainerView :data="data" @openModal="modalOpen" />
   <ModalView
     :data="data"
     :isModal="isModal"
