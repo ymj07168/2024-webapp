@@ -1,6 +1,7 @@
 <template>
   <NavbarView />
-  <ContainerView :data="data" @openModal="modalOpen" />
+  <SearchBarView :data="data_temp" @searchMovie="searchMovie" />
+  <ContainerView :data="data_temp" @openModal="modalOpen" />
   <ModalView
     :data="data"
     :isModal="isModal"
@@ -14,6 +15,7 @@ import mdata from "./assets/mdata";
 import ContainerView from "./components/ContainerView.vue";
 import ModalView from "./components/ModalView.vue";
 import NavbarView from "./components/NavbarView.vue";
+import SearchBarView from "./components/SearchBarView.vue";
 
 export default {
   name: "appView",
@@ -22,6 +24,7 @@ export default {
       data: mdata,
       isModal: false,
       selectedNum: 0,
+      data_temp: [...mdata],
     };
   },
   methods: {
@@ -35,11 +38,18 @@ export default {
     modalClose() {
       this.isModal = false;
     },
+    searchMovie(title) {
+      console.log("영화이름", title);
+      this.data_temp = this.data.filter((movie) => {
+        return movie.title.includes(title);
+      });
+    },
   },
   components: {
     NavbarView: NavbarView,
     ModalView: ModalView,
     ContainerView: ContainerView,
+    SearchBarView: SearchBarView,
   },
 };
 </script>
