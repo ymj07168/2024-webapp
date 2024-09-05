@@ -1,0 +1,13 @@
+$color: red;
+
+$fontColor-100: #f8f9fa;
+$fontColor-200: #e9ecef;
+
+.container {
+  width: 1300px;
+  margin: 0;
+  position: relative;
+  @media screen and (max-width: 800) {
+    width: 100%;
+  }
+}

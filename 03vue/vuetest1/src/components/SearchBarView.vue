@@ -16,7 +16,6 @@
       @change="handleSearch"
     />
     <button>검색</button>
-    <p>{{ inputText }}</p>
   </div>
 </template>
 

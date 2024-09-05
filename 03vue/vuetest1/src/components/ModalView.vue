@@ -1,9 +1,11 @@
 <template>
   <div class="modal" v-if="isModal">
     <div class="inner">
-      <h2 class="mb-10">{{ data[num].title }}</h2>
+      <h2 class="mb-10">
+        {{ data.filter((item) => item.id == num)[0].title }}
+      </h2>
       <hr class="mb-10" />
-      <p class="mb-10">{{ data[num].detail }}</p>
+      <p class="mb-10">{{ data.filter((item) => item.id == num)[0].detail }}</p>
       <button class="btn btn-primary" v-on:click="$emit('closeModal')">
         닫기
       </button>

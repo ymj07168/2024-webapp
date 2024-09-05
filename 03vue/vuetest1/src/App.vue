@@ -1,7 +1,14 @@
 <template>
   <NavbarView />
   <SearchBarView :data="data_temp" @searchMovie="searchMovie" />
-  <ContainerView :data="data_temp" @openModal="modalOpen" />
+  <div class="container">
+    <button @click="showAllView">전체보기</button>
+  </div>
+  <ContainerView
+    :data="data_temp"
+    @openModal="modalOpen"
+    @increaseLike="increaseLike"
+  />
   <ModalView
     :data="data"
     :isModal="isModal"
@@ -29,7 +36,7 @@ export default {
   },
   methods: {
     increaseLike(i) {
-      this.data[i].like += 1;
+      this.data.filter((movie) => movie.id == i)[0].like += 1;
     },
     modalOpen(num) {
       this.selectedNum = num;
@@ -43,6 +50,9 @@ export default {
       this.data_temp = this.data.filter((movie) => {
         return movie.title.includes(title);
       });
+    },
+    showAllView() {
+      this.data_temp = [...this.data];
     },
   },
   components: {
