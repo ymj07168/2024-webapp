@@ -36,13 +36,6 @@ onMounted(() => {
 
       if (window.kakao && window.kakao.maps) {
         initMap();
-      } else {
-        const script = document.createElement("script");
-        /* global kakao */
-        script.onload = () => kakao.maps.load(initMap);
-        script.src =
-          "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=05222ace53571c8fbb636c91def0fbc2";
-        document.head.appendChild(script);
       }
     },
     (err) => {
