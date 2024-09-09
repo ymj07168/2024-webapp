@@ -45,6 +45,7 @@
     <div class="btn btn-primary" @click="addUser">회원가입</div>
   </div>
   {{ userdata }}
+  <p>* 아이디가 동일한 회원이 존재할 경우, 해당 회원 정보가 수정됩니다.</p>
 </template>
 
 <script setup>
@@ -76,9 +77,8 @@ const addUser = () => {
     addr: userdata.value.addr,
     image: userdata.value.image,
   };
-  console.log(
-    store.state.userData.filter((item) => item.userid == uData.userid)
-  );
+
+  // user id가 있으면 회원 수정, 없으면 회원 가입
   if (store.state.userData.filter((item) => item.userid == uData.userid)) {
     store.commit("updateUser", uData);
   } else {

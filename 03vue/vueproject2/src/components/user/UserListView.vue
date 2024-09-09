@@ -2,16 +2,23 @@
   <div
     v-for="(item, i) in $store.state.userData"
     :key="i"
-    class="d-flex gap-2 border rounded p-3 mb-3"
+    class="d-flex gap-2 border rounded p-3 mb-3 justify-content-between align-items-center"
   >
-    <div class="avata">
-      <img :src="item.image" alt="" />
+    <div class="d-flex gap-2 align-items-center">
+      <div class="avata">
+        <img :src="item.image" alt="" />
+      </div>
+      <div>
+        <h5 class="mb-0">{{ item.userid }}</h5>
+        <p class="mb-0">{{ item.username }}</p>
+      </div>
     </div>
-    <div>
-      <h5 class="mb-0">{{ item.userid }}</h5>
-      <p class="mb-0">{{ item.username }}</p>
-    </div>
-    <button @click="$store.commit('removeUser', item.userid)">delete</button>
+    <button
+      class="btn btn-primary"
+      @click="$store.commit('removeUser', item.userid)"
+    >
+      삭제
+    </button>
   </div>
 </template>
 
