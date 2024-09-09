@@ -9,9 +9,9 @@
 import { onMounted, ref } from "vue";
 
 const locations = [
-  { lat: 37.477818, lng: 126.88904 }, // 올리브영 현대아울렛가산점
-  { lat: 37.480981, lng: 126.882436 }, // 올리브영 가산점
-  { lat: 37.485849, lng: 126.898809 }, // 올리브영 구로디지털점
+  { name: "올리브영 현대아울렛가산점", lat: 37.477818, lng: 126.88904 }, // 올리브영 현대아울렛가산점
+  { name: "올리브영 가산점", lat: 37.480981, lng: 126.882436 }, // 올리브영 가산점
+  { name: "올리브영 구로디지털점", lat: 37.485849, lng: 126.898809 }, // 올리브영 구로디지털점
 ];
 
 const latitude = ref(0);
@@ -62,6 +62,26 @@ const initMap = () => {
 
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
+
+    // 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
+    var iwContent = `<div style="padding:5px;">${location.name}</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+
+    // 인포윈도우를 생성합니다
+    var infowindow = new kakao.maps.InfoWindow({
+      content: iwContent,
+    });
+
+    // 마커에 마우스오버 이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, "mouseover", function () {
+      // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+      infowindow.open(map, marker);
+    });
+
+    // 마커에 마우스아웃 이벤트를 등록합니다
+    kakao.maps.event.addListener(marker, "mouseout", function () {
+      // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+      infowindow.close();
+    });
   });
 
   // 지도 중심좌표 변경 이벤트 리스너 추가
