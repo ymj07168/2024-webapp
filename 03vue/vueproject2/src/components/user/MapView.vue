@@ -1,7 +1,19 @@
 <template>
   <div>지도 {{ moveLat }} / {{ moveLng }}</div>
-  <div id="map" style="width: 500px; height: 400px"></div>
-
+  <div class="d-flex flex-row gap-5 flex-wrap" style="width: 100%">
+    <div id="map" style="width: 400px; height: 400px"></div>
+    <div id="search-map" style="width: 400px; height: 400px"></div>
+  </div>
+  <div class="my-3">
+    <input
+      v-model="searchKeyword"
+      @keyup.enter="searchPlaces"
+      type="text"
+      class="form-control"
+      placeholder="장소를 입력하세요"
+    />
+    <button @click="searchPlaces" class="btn btn-primary mt-2">검색</button>
+  </div>
   {{ latitude }}{{ longitude }}
 </template>
 
@@ -19,6 +31,7 @@ const longitude = ref(0);
 
 const moveLat = ref(0);
 const moveLng = ref(0);
+const searchKeyword = ref("이태원");
 
 onMounted(() => {
   if (!("geolocation" in navigator)) {
@@ -27,13 +40,12 @@ onMounted(() => {
 
   navigator.geolocation.getCurrentPosition(
     (pos) => {
-      console.log(pos.coords.latitude, pos.coords.longitude);
-
       latitude.value = pos.coords.latitude;
       longitude.value = pos.coords.longitude;
 
       if (window.kakao && window.kakao.maps) {
         initMap();
+        initSearchMap();
       }
     },
     (err) => {
@@ -51,46 +63,92 @@ const initMap = () => {
 
   let map = new kakao.maps.Map(container, options);
 
-  // 여러 마커를 생성하기 위한 배열 순회
   locations.forEach((location) => {
     let markerPosition = new kakao.maps.LatLng(location.lat, location.lng);
 
-    // 마커를 생성합니다
     let marker = new kakao.maps.Marker({
       position: markerPosition,
     });
 
-    // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
 
-    // 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
-    var iwContent = `<div style="padding:5px;">${location.name}</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-
-    // 인포윈도우를 생성합니다
+    var iwContent = `<div style="padding:5px;">${location.name}</div>`;
     var infowindow = new kakao.maps.InfoWindow({
       content: iwContent,
     });
 
-    // 마커에 마우스오버 이벤트를 등록합니다
     kakao.maps.event.addListener(marker, "mouseover", function () {
-      // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
       infowindow.open(map, marker);
     });
 
-    // 마커에 마우스아웃 이벤트를 등록합니다
     kakao.maps.event.addListener(marker, "mouseout", function () {
-      // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
       infowindow.close();
     });
   });
 
-  // 지도 중심좌표 변경 이벤트 리스너 추가
   kakao.maps.event.addListener(map, "center_changed", function () {
     var latlng = map.getCenter();
 
     moveLat.value = latlng.getLat();
     moveLng.value = latlng.getLng();
   });
+};
+
+const initSearchMap = () => {
+  var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+
+  var mapContainer = document.getElementById("search-map"),
+    mapOption = {
+      center: new kakao.maps.LatLng(37.566826, 126.9786567),
+      level: 3,
+    };
+
+  var map = new kakao.maps.Map(mapContainer, mapOption);
+
+  var ps = new kakao.maps.services.Places();
+
+  ps.keywordSearch(searchKeyword.value, placesSearchCB);
+
+  // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+  function placesSearchCB(data, status) {
+    if (status === kakao.maps.services.Status.OK) {
+      var bounds = new kakao.maps.LatLngBounds();
+
+      for (var i = 0; i < data.length; i++) {
+        displayMarker(data[i]);
+        bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+      }
+
+      map.setBounds(bounds);
+    }
+  }
+
+  function displayMarker(place) {
+    var marker = new kakao.maps.Marker({
+      map: map,
+      position: new kakao.maps.LatLng(place.y, place.x),
+    });
+
+    kakao.maps.event.addListener(marker, "click", function () {
+      infowindow.setContent(
+        '<div style="padding:5px;font-size:12px;">' +
+          place.place_name +
+          "</div>"
+      );
+      infowindow.open(map, marker);
+    });
+  }
+};
+
+// 사용자가 검색할 때 호출되는 함수입니다.
+const searchPlaces = () => {
+  if (!searchKeyword.value) {
+    alert("검색어를 입력하세요!");
+    return;
+  }
+
+  // 새로운 검색어로 장소 검색을 다시 수행합니다.
+  initSearchMap();
 };
 </script>
 
