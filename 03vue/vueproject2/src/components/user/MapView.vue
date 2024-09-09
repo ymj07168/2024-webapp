@@ -3,17 +3,18 @@
   <div class="d-flex flex-row gap-5 flex-wrap" style="width: 100%">
     <div id="map" style="width: 400px; height: 400px"></div>
     <div id="search-map" style="width: 400px; height: 400px"></div>
+    <div class="my-3">
+      <input
+        v-model="searchKeyword"
+        @keyup.enter="searchPlaces"
+        type="text"
+        class="form-control"
+        placeholder="장소를 입력하세요"
+      />
+      <button @click="searchPlaces" class="btn btn-primary mt-2">검색</button>
+    </div>
   </div>
-  <div class="my-3">
-    <input
-      v-model="searchKeyword"
-      @keyup.enter="searchPlaces"
-      type="text"
-      class="form-control"
-      placeholder="장소를 입력하세요"
-    />
-    <button @click="searchPlaces" class="btn btn-primary mt-2">검색</button>
-  </div>
+
   {{ latitude }}{{ longitude }}
 </template>
 
