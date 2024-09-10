@@ -1,27 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
+import Button from "./components/Button";
+import "./index.css";
 
-const App = () => {
-  const [data, setData] = useState([
-    "1. hihihihi",
-    "1. hihihihi",
-    "1. hihihihi",
-    "1. hihihihi",
-  ]);
-
-  const [num, setNum] = useState(0);
-  const [modal, setModal] = useState(false);
-
-  const listView = () => {
-    alert("ddd");
-  };
-
-  return <div>
-    {data.map((item, i) => {
-      return (
-        
-      )
-    })}
-  </div>;
-};
+function App() {
+  return (
+    <div>
+      <Button className="btn-primary">click</Button>
+      <Button className="btn-info">click</Button>
+    </div>
+  );
+}
 
 export default App;

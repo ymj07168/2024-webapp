@@ -10,4 +10,23 @@ body {
 .container {
   width: 1000px;
   margin: 0 auto;
+  background-color: skyblue;
+}
+
+.btn {
+  width: 100px;
+  padding: 10px;
+  background-color: skyblue;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  color: white;
+}
+.btn.btn-primary {
+  background: blue;
+}
+.btn.btn-info {
+  background: green;
 }
